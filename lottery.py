@@ -82,24 +82,21 @@ class lottery(commands.Cog):
                 print('no time for handouts', self.pd['last_date'], datetime.now().strftime(mf))
                 return
         # pull prize
-        print(1)
+        print('lottery not forced')
         try:
             prize = self._pull_prize()
         except:
             await self.bot.send(self.pd['channel'], 'no prizes in cookie jar')
             return 'failed to pull a cookie out of a cookie jar. cookie jar may be empty or 4o screwed it up again'
-        print(2)
+        print('prize:', prize)
         # define a prize winner
         try:
             uid = self._winner(prize[0][0])
         except:
             await self.bot.send(self.pd['channel'], 'failed to define a winner. either nobody was participating, or 4o screwed it up again')
             return 'None'
-        print(3)
+        print('winner:', uid)
         # clear participants
-        self.pd['last_date'] = datetime.now().strftime(mf)
-        self.pd.sync()
-        self._clear_participants()
         print(4)
         # start a task for next prize handout
         msg = 'cookie handout by new bot !!!111 beep boop boop i spy with my robot eye {} gets the prize: `{}`. '.format(self._print_user(uid[0]), prize[0][1])
@@ -108,6 +105,9 @@ class lottery(commands.Cog):
         msg += 'rnd info: prize {}/{} participant {}/{}\n'.format(prize[2], prize[1], uid[2], uid[1])
         msg += ' current prize list: `{}`'.format(self._print_prizes())
         await self.bot.send(self.pd['channel'], msg)
+        self.pd['last_date'] = datetime.now().strftime(mf)
+        self._clear_participants()
+        self.pd.sync()
         print(5)
 
     def add_prize(self, uid, prize):
