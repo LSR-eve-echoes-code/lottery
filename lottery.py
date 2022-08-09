@@ -110,10 +110,9 @@ class lottery(commands.Cog):
         if pn == 0:
             print('no cookies for winner ', self._print_user(w), '. total cookies: ', len(self.pd['prizes']))
             return
-        rnd_p = random.randrange(n)
-        p = pl[rnd]
+        rnd_p = random.randrange(pn)
+        p = pl[rnd_p]
         print('prize: ', p[1])
-        print('prize:', uid)
         msg = 'cookie handout by new bot !!!111 beep boop boop i spy with my robot eye {} gets the prize: `{}`. '.format(self._print_user(w), p[1])
         msg += '{} please give the promissed cookie immediately\n'.format(self._print_user(p[0]))
         msg += 'participants list is cleared. please send any msg to take part in next round\n'
