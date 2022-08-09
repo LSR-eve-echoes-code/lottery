@@ -96,7 +96,6 @@ class lottery(commands.Cog):
             if self.pd['last_date'] == datetime.now().strftime(mf):
                 print('no time for handouts', self.pd['last_date'], datetime.now().strftime(mf))
                 return
-        # pull prize
         print('pulling winner from list')
         wn = len(self.pd['participants'])
         if wn == 0:
@@ -105,7 +104,6 @@ class lottery(commands.Cog):
         rnd_w = random.randrange(wn)
         w = self.pd['participants'][rnd_w]
         print('winner:', w)
-        # define a prize winner
         print('pulling prize from list')
         pl = [x for x in self.pd['prizes'] if x[0] != w]
         pn = len(pl)
@@ -116,8 +114,6 @@ class lottery(commands.Cog):
         p = pl[rnd]
         print('prize: ', p[1])
         print('prize:', uid)
-        # clear participants
-        # start a task for next prize handout
         msg = 'cookie handout by new bot !!!111 beep boop boop i spy with my robot eye {} gets the prize: `{}`. '.format(self._print_user(w), p[1])
         msg += '{} please give the promissed cookie immediately\n'.format(self._print_user(p[0]))
         msg += 'participants list is cleared. please send any msg to take part in next round\n'
